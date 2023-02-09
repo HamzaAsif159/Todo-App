@@ -1,18 +1,10 @@
 import React from "react"
-import { SmileOutlined } from "@ant-design/icons"
 
 export default function Header() {
   return (
     <>
-      <h1 style={{ display: "inline" }}>Hello</h1>
-      <SmileOutlined
-        style={{
-          width: "16px",
-          height: "20px",
-          color: "#08c",
-          display: "inline",
-        }}
-      />
+      <h1 className="font-bold text-5xl pt-8 pb-2 text-center">ToDo App</h1>
+      <p className="text-center text-[#434242]">Add your todo for future use</p>
     </>
   )
 }
