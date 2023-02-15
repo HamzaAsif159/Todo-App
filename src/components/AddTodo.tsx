@@ -1,7 +1,7 @@
 import React from "react"
 import uuid from "react-uuid"
 
-export default function AddTodo(props: any) {
+export default function AddTodo(props: any): JSX.Element {
   const [task, setTask] = React.useState({
     id: "",
     text: "",

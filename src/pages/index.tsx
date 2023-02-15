@@ -2,14 +2,15 @@ import Head from "next/head"
 import React from "react"
 import Header from "@/components/Header"
 import AddTodo from "@/components/AddTodo"
+import { TodoItem } from "@/components/TodoItem"
 
 export default function Home() {
-  const [list, setList] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      const localData = localStorage.getItem("List")
-      return localData !== null ? JSON.parse(localData) : []
-    }
-  })
+  const [list, setList] = React.useState([])
+
+  React.useEffect(() => {
+    const localData = localStorage.getItem("List")
+    setList(() => (localData !== null ? JSON.parse(localData) : []))
+  }, [])
 
   function addTodo(task: any) {
     if (task.text !== "") {
@@ -24,8 +25,6 @@ export default function Home() {
       return list.filter((task: any) => task.id !== id)
     })
   }
-
-  console.log(list)
 
   React.useEffect(() => {
     localStorage.setItem("List", JSON.stringify(list))
@@ -42,6 +41,15 @@ export default function Home() {
       <main className="bg-[#FFFEF2] h-[100vh] px-8">
         <Header />
         <AddTodo onAdd={addTodo} />
+        {list &&
+          list.map((todo: any) => (
+            <TodoItem
+              key={todo.id}
+              Id={todo.id}
+              text={todo.text}
+              Delete={deleteTodo}
+            />
+          ))}
       </main>
     </>
   )
